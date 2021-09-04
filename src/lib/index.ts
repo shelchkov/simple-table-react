@@ -1,3 +1,1 @@
-// export { Table } from "./table/table"
-
-export const hi = () => "hi"
+export { DataTable } from "./table/data-table"
