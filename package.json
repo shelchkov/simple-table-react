@@ -4,15 +4,25 @@
   "description": "React table",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
-  "files": ["dist/**/*"],
+  "files": [
+    "dist/**/*"
+  ],
   "scripts": {
     "start": "webpack serve",
-    "build": "tsc --project tsconfig.json && babel build --out-dir dist --copy-files",
+    "build": "npm run copy-css && npm run compile:ts && npm run transpile:js",
     "prebuild": "rm -rf dist && rm -rf build",
-    "postbuild": "rm -rf build"
+    "postbuild": "rm -rf build",
+    "copy-css": "mkdir dist && mkdir dist/styles && cp -r ./src/lib/styles/ ./dist/styles/",
+    "compile:ts": "tsc --project tsconfig.json",
+    "transpile:js": "babel build --out-dir dist --copy-files"
   },
-  "keywords": ["react", "ui", "table"],
+  "keywords": [
+    "react",
+    "ui",
+    "table"
+  ],
   "devDependencies": {
+    "@babel/cli": "^7.15.4",
     "@babel/core": "^7.15.4",
     "@babel/node": "^7.15.4",
     "@babel/preset-env": "^7.15.4",
@@ -23,9 +33,7 @@
     "babel-loader": "^8.2.2",
     "css-loader": "^6.2.0",
     "html-webpack-plugin": "^5.3.2",
-    "node-sass": "^6.0.1",
     "path": "^0.12.7",
-    "sass-loader": "^12.1.0",
     "style-loader": "^3.2.1",
     "ts-loader": "^9.2.5",
     "typescript": "^4.4.2",

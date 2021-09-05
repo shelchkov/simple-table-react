@@ -1,5 +1,5 @@
 import React, { CSSProperties, ReactNode } from 'react'
-import "./cell.styles.scss"
+import "../styles/cell.styles.css"
 
 interface Props {
   children?: ReactNode
