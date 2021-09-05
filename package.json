@@ -9,12 +9,11 @@
   ],
   "scripts": {
     "start": "webpack serve",
-    "build": "npm run copy-css && npm run compile:ts && npm run transpile:js",
-    "prebuild": "rm -rf dist && rm -rf build",
-    "postbuild": "rm -rf build",
+    "build": "npm run copy-css && npm run compile:ts",
+    "prebuild": "rm -rf dist",
     "copy-css": "mkdir dist && mkdir dist/styles && cp -r ./src/lib/styles/ ./dist/styles/",
-    "compile:ts": "tsc --project tsconfig.json",
-    "transpile:js": "babel build --out-dir dist --copy-files"
+    "compile:ts": "tsc",
+    "prepublishOnly": "npm run build"
   },
   "keywords": [
     "react",
@@ -22,15 +21,8 @@
     "table"
   ],
   "devDependencies": {
-    "@babel/cli": "^7.15.4",
-    "@babel/core": "^7.15.4",
-    "@babel/node": "^7.15.4",
-    "@babel/preset-env": "^7.15.4",
-    "@babel/preset-react": "^7.14.5",
-    "@babel/preset-typescript": "^7.15.0",
     "@types/react": "^17.0.19",
     "@types/react-dom": "^17.0.9",
-    "babel-loader": "^8.2.2",
     "css-loader": "^6.2.0",
     "html-webpack-plugin": "^5.3.2",
     "path": "^0.12.7",
@@ -41,8 +33,8 @@
     "webpack-cli": "^4.8.0",
     "webpack-dev-server": "^3.11.2"
   },
-  "dependencies": {
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2"
+  "peerDependencies": {
+    "react": "^16.8.0 || ^17.0.0",
+    "react-dom": "^16.8.0 || ^17.0.0"
   }
 }
