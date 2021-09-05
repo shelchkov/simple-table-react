@@ -10,10 +10,12 @@
   "scripts": {
     "start": "webpack serve",
     "build": "npm run copy-css && npm run compile:ts",
+    "lint:fix": "npm run lint -- --fix",
     "prebuild": "rm -rf dist",
     "copy-css": "mkdir dist && mkdir dist/styles && cp -r ./src/lib/styles/ ./dist/styles/",
     "compile:ts": "tsc",
-    "prepublishOnly": "npm run build"
+    "prepublishOnly": "npm run build",
+    "lint": "npx eslint \"./src/**/*.{ts,tsx,js,jsx}\"",
   },
   "keywords": [
     "react",
@@ -23,7 +25,16 @@
   "devDependencies": {
     "@types/react": "^17.0.19",
     "@types/react-dom": "^17.0.9",
+    "@typescript-eslint/eslint-plugin": "^4.30.0",
+    "@typescript-eslint/parser": "^4.30.0",
     "css-loader": "^6.2.0",
+    "eslint": "^7.32.0",
+    "eslint-config-standard": "^16.0.3",
+    "eslint-plugin-import": "^2.24.2",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^5.1.0",
+    "eslint-plugin-react": "^7.25.1",
+    "eslint-plugin-react-hooks": "^4.2.0",
     "html-webpack-plugin": "^5.3.2",
     "path": "^0.12.7",
     "style-loader": "^3.2.1",
