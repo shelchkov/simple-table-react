@@ -1,5 +1,7 @@
 # Simple Table React
 
+![npm](https://img.shields.io/npm/v/simple-table-react)
+
 ## How to use
 
 Pass an array of objects and a list of columns (headers) to DataTable:
@@ -16,7 +18,3 @@ Pass an array of objects and a list of columns (headers) to DataTable:
 ```
 
 DataTable also receives optional functions: handleRowClick, getCellColor and getValue. Component that Actions function returns will be placed at the right of every row.
-
-## Contribution
-
-Run `npm version patch` to add new tag and push it to GitHub. Run `npm publish` to build and publish puckage.
