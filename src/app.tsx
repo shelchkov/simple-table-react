@@ -14,7 +14,8 @@ const data: User[] = [
   { id: "3", name: "Megan", gender: "F" },
 ]
 
-const getCellColor = (name: string, { id }: User): string | undefined => name === "name" && id === "2" ? "red" : undefined
+const getCellColor = (name: string, { id }: User): string | undefined =>
+  name === "name" && id === "2" ? "red" : undefined
 
 const Actions = (user: User) => <button onClick={() => console.log(user)}>Action</button>
 
@@ -23,7 +24,7 @@ const getCellValue = (name: string, value: any): string => {
     return value
   }
 
-  switch(value) {
+  switch (value) {
     case "M":
       return "Male"
     case "F":
@@ -40,7 +41,14 @@ export const App = () => {
     <div>
       <h1>Hello World</h1>
 
-      <DataTable headers={headers} data={data} actions={Actions} handleRowClick={handleClick} getCellColor={getCellColor} getValue={getCellValue} />
+      <DataTable
+        headers={headers}
+        data={data}
+        actions={Actions}
+        handleRowClick={handleClick}
+        getCellColor={getCellColor}
+        getValue={getCellValue}
+      />
     </div>
   )
 }

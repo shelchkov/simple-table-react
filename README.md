@@ -1,5 +1,7 @@
 # Simple Table React
 
+![npm](https://img.shields.io/npm/v/simple-table-react)
+
 ## How to use
 
 Pass an array of objects and a list of columns (headers) to DataTable:

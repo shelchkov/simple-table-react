@@ -3,33 +3,33 @@ import { Cell } from "./cell"
 import { noop } from "./utils"
 
 interface Props<T> {
-	headers: string[]
-	data: T
-	actions?: (value: T) => ReactElement
-	handleRowClick?: (data: T) => void
+  headers: string[]
+  data: T
+  actions?: (value: T) => ReactElement
+  handleRowClick?: (data: T) => void
   getValue?: (name: string, value: any, data: T) => string | number
   getCellColor?: (name: string, data: T) => string | undefined
 }
 
 export const DataRow = <T extends Record<string, string | number>>({
-	headers,
-	data,
-	actions,
-	handleRowClick = noop,
+  headers,
+  data,
+  actions,
+  handleRowClick = noop,
   getValue = (_, value) => value,
   getCellColor = noop,
 }: Props<T>): ReactElement => {
-	const onClick = () => handleRowClick(data)
+  const onClick = () => handleRowClick(data)
 
-	return (
-		<tr onClick={onClick}>
-			{headers.map((name) => (
-				<Cell key={name} style={{ color: getCellColor(name, data) }}>
-					{getValue(name, data[name], data)}
-				</Cell>
-			))}
+  return (
+    <tr onClick={onClick}>
+      {headers.map((name) => (
+        <Cell key={name} style={{ color: getCellColor(name, data) }}>
+          {getValue(name, data[name], data)}
+        </Cell>
+      ))}
 
-			{actions && <Cell>{actions(data)}</Cell>}
-		</tr>
-	)
+      {actions && <Cell>{actions(data)}</Cell>}
+    </tr>
+  )
 }

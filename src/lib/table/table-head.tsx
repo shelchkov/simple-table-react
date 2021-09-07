@@ -1,10 +1,10 @@
-import React, { ReactElement } from 'react'
-import { Cell } from './cell'
-import { TableData } from './utils'
+import React, { ReactElement } from "react"
+import { Cell } from "./cell"
+import { TableData } from "./utils"
 
 interface Props<T> {
-	headers: string[]
-	actions?: (value: T) => ReactElement
+  headers: string[]
+  actions?: (value: T) => ReactElement
 }
 
 export const TableHead = <T extends TableData>({ headers, actions }: Props<T>): ReactElement => (

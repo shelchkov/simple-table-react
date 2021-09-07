@@ -1,4 +1,4 @@
-import React, { CSSProperties, ReactNode } from 'react'
+import React, { CSSProperties, ReactNode } from "react"
 import "../styles/cell.styles.css"
 
 interface Props {
@@ -9,10 +9,16 @@ interface Props {
 
 export const Cell = ({ children = <></>, isHead, ...rest }: Props) => {
   if (isHead) {
-    return <th className="cell" {...rest}>{children}</th>
+    return (
+      <th className="cell" {...rest}>
+        {children}
+      </th>
+    )
   }
 
   return (
-    <td className="cell" {...rest}>{children}</td>
+    <td className="cell" {...rest}>
+      {children}
+    </td>
   )
 }
