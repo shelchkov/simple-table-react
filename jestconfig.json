@@ -1,0 +1,13 @@
+{
+  "transform": {
+    "^.+\\.(t|j)sx?$": "ts-jest"
+  },
+  "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
+  "moduleFileExtensions": ["ts", "tsx", "js", "jsx", "json", "node"],
+  "collectCoverageFrom": ["src/lib/**/*.{ts,tsx,js,jsx}", "!src/lib/index.ts"],
+  "setupFiles": ["<rootDir>/src/lib/__tests__/setup-tests.ts"],
+  "moduleNameMapper": {
+    "^.+\\.styles\\.(css|sass|scss)$": "<rootDir>/src/lib/__tests__/style-mock.ts"
+  },
+  "modulePathIgnorePatterns": ["src/lib/__tests__/(style-mock|setup-tests).ts"]
+}
