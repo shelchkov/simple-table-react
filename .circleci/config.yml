@@ -11,11 +11,11 @@ jobs:
     steps:
       - checkout
       - run:
-        name: Install dependencies
-        command: npm install
+          name: Install dependencies
+          command: npm install
       - run:
-        name: Run tests
-        command: npm run test:cov
+          name: Run tests
+          command: npm run test:cov
 
 workflows:
   version: 2
