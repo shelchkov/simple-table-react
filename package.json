@@ -1,6 +1,6 @@
 {
   "name": "simple-table-react",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "React table",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -51,6 +51,8 @@
     "jest": "^27.1.0",
     "path": "^0.12.7",
     "prettier": "^2.3.2",
+    "react": "^16.8.0",
+    "react-dom": "^16.8.0",
     "style-loader": "^3.2.1",
     "ts-jest": "^27.0.5",
     "ts-loader": "^9.2.5",
