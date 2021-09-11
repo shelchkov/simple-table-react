@@ -1,6 +1,7 @@
 # Simple Table React
 
 ![npm](https://img.shields.io/npm/v/simple-table-react)
+[![codecov](https://codecov.io/gh/shelchkov/simple-table-react/branch/master/graph/badge.svg?token=ZP819N2P5X)](https://codecov.io/gh/shelchkov/simple-table-react)
 
 ## How to use
 

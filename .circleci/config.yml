@@ -21,9 +21,36 @@ jobs:
           command: npm run test:cov
       - codecov/upload:
           file: './coverage/clover.xml'
+  
+  publish:
+    executor: node-image
+    steps:
+      - checkout
+      - run:
+          name: Install dependencies
+          command: npm install
+      - run:
+          name: Authenticate with npm
+          command: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > ./.npmrc
+      - run:
+          name: Publish publish-package
+          command: npm publish
 
 workflows:
   version: 2
   test:
     jobs:
-      - unit-tests
+      - unit-tests:
+          filters:
+            branches:
+              ignore: master
+            tags:
+              ignore: /.*/
+  publish-package:
+    jobs:
+      - publish:
+          filters:
+            tags:
+              only: /^v.*/
+            branches:
+              only: master
