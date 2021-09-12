@@ -16,21 +16,21 @@ jobs:
       - checkout
       - restore_cache:
           keys:
-            - node-v1-{{ .Branch }}-{{ checksum "package-lock.json" }}
-            - node-v1-{{ .Branch }}-
-            - node-v1-
+            - node-v2-{{ .Branch }}-{{ checksum "package-lock.json" }}
+            - node-v2-{{ .Branch }}-
+            - node-v2-
       - run:
           name: Install dependencies
           command: npm install
+      - save_cache:
+          paths:
+            - node_modules
+          key: node-v2-{{ .Branch }}-{{ checksum "package-lock.json" }}
       - run:
           name: Run tests
           command: npm run test:cov
       - codecov/upload:
           file: './coverage/cobertura-coverage.xml'
-      - save_cache:
-          paths:
-            - node_modules
-          key: node-v1-{{ .Branch }}-{{ checksum "package-lock.json" }}
 
   publish-package:
     executor: node-image
@@ -39,11 +39,15 @@ jobs:
       - checkout
       - restore_cache:
           keys:
-            - node-v1-{{ .Branch }}-
-            - node-v1-
+            - node-v2-{{ .Branch }}-
+            - node-v2-
       - run:
           name: Install dependencies
           command: npm install
+      - save_cache:
+          paths:
+            - node_modules
+          key: node-v2-{{ .Branch }}-{{ checksum "package-lock.json" }}
       - run:
           name: Authenticate with npm
           command: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > ./.npmrc
@@ -54,10 +58,6 @@ jobs:
           root: .
           paths:
             - .
-      - save_cache:
-          paths:
-            - node_modules
-          key: node-v1-{{ .Branch }}-{{ checksum "package-lock.json" }}
 
   deploy-demo:
     executor: node-image
@@ -68,6 +68,10 @@ jobs:
       - restore_cache:
           key: heroku-v1
       - heroku/install
+      - save_cache:
+          paths:
+            - ~/usr/local/bin/heroku
+          key: heroku-v1
       - run:
           name: Build demo app
           command: npm run build:app
@@ -80,10 +84,6 @@ jobs:
       - run:
           name: Push to Heroku
           command: cd demo-app && git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git HEAD:master
-      - save_cache:
-          paths:
-            - ~/usr/local/bin/heroku
-          key: heroku-v1
 
 workflows:
   version: 2
