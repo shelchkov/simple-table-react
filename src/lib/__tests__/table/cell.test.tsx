@@ -44,4 +44,34 @@ describe("Cell Component", () => {
       })
     })
   })
+
+  describe("With isHead prop", () => {
+    const children = "Test string 2"
+
+    beforeEach(() => {
+      const props = { children, isHead: true }
+      component = shallow(<Cell {...props} />)
+    })
+
+    it("renders th", () => {
+      expect(component.find("th").exists()).toBeTruthy()
+    })
+
+    it("renders text", () => {
+      expect(component.find("th").text()).toBe(children)
+    })
+
+    describe("Complecated children", () => {
+      const children = <p>Test Paragrath 2</p>
+
+      beforeEach(() => {
+        const props = { children, isHead: true }
+        component = shallow(<Cell {...props} />)
+      })
+
+      it("renders tag", () => {
+        expect(component.find("th").props().children).toBe(children)
+      })
+    })
+  })
 })

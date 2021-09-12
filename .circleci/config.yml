@@ -42,7 +42,7 @@ jobs:
             - .
 
   deploy-demo:
-    executor: heroku/default
+    executor: node-image
     steps:
       - attach_workspace:
           at: .
