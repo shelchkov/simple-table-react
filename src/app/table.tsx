@@ -1,11 +1,6 @@
-import React from "react"
-import { DataTable } from "./lib"
-
-type User = {
-  id: string
-  name: string
-  gender: string
-}
+import React, { ReactElement } from "react"
+import { DataTable } from "../lib"
+import { User } from "./utils"
 
 const headers = ["id", "name", "gender"]
 const data: User[] = [
@@ -34,21 +29,15 @@ const getCellValue = (name: string, value: any): string => {
   }
 }
 
-export const App = () => {
-  const handleClick = ({ id }: User) => console.log(`Row with id ${id} was clicked`)
+const handleClick = ({ id }: User) => console.log(`Row with id ${id} was clicked`)
 
-  return (
-    <div>
-      <h1>Hello World</h1>
-
-      <DataTable
-        headers={headers}
-        data={data}
-        actions={Actions}
-        handleRowClick={handleClick}
-        getCellColor={getCellColor}
-        getValue={getCellValue}
-      />
-    </div>
-  )
-}
+export const Table = (): ReactElement => (
+  <DataTable
+    headers={headers}
+    data={data}
+    actions={Actions}
+    handleRowClick={handleClick}
+    getCellColor={getCellColor}
+    getValue={getCellValue}
+  />
+)

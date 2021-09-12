@@ -2,6 +2,7 @@ version: 2.1
 
 orbs:
   codecov: codecov/codecov@1.0.2
+  heroku: circleci/heroku@1.2.6
 
 executors:
   node-image:
@@ -21,8 +22,8 @@ jobs:
           command: npm run test:cov
       - codecov/upload:
           file: './coverage/clover.xml'
-  
-  publish:
+
+  publish-package:
     executor: node-image
     steps:
       - checkout
@@ -33,8 +34,30 @@ jobs:
           name: Authenticate with npm
           command: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > ./.npmrc
       - run:
-          name: Publish publish-package
+          name: Publish package
           command: npm publish
+      - persist_to_workspace:
+          root: .
+          paths:
+            - .
+
+  deploy-demo:
+    executor: heroku/default
+    steps:
+      - attach_workspace:
+          at: .
+      - heroku/install
+      - heroku/check-authentication:
+          print-whoami: true
+      - run:
+          name: Build demo app
+          command: npm run build:app
+      - run:
+          name: Commit files
+          command: cd demo-app && git init && git add . && git commit -m'Deploy $CIRCLE_TAG'
+      - run:
+          name: Push to Heroku
+          command: cd demo-app && git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git $CIRCLE_TAG^{}:main
 
 workflows:
   version: 2
@@ -46,11 +69,19 @@ workflows:
               ignore: master
             tags:
               ignore: /.*/
-  publish-package:
+  deploy:
     jobs:
-      - publish:
+      - publish-package:
           filters:
             tags:
               only: /^v.*/
             branches:
-              only: master
+              ignore: /.*/
+      - deploy-demo:
+          requires:
+            - publish-package
+          filters:
+              tags:
+                only: /^v.*/
+              branches:
+                ignore: /.*/
