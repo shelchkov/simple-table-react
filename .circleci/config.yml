@@ -96,8 +96,6 @@ workflows:
   deploy:
     jobs:
       - publish-package:
-          requires:
-            - unit-tests
           filters:
             tags:
               only: /^v.*/
