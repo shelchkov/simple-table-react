@@ -12,8 +12,14 @@ executors:
 jobs:
   unit-tests:
     executor: node-image
+    resource_class: small
     steps:
       - checkout
+      - restore_cache:
+          keys:
+            - node-v1-{{ .Branch }}-{{ checksum "package-lock.json" }}
+            - node-v1-{{ .Branch }}-
+            - node-v1-
       - run:
           name: Install dependencies
           command: npm install
@@ -22,11 +28,20 @@ jobs:
           command: npm run test:cov
       - codecov/upload:
           file: './coverage/cobertura-coverage.xml'
+      - save_cache:
+          paths:
+            - ~/usr/local/lib/node_modules
+          key: node-v1-{{ .Branch }}-{{ checksum "package-lock.json" }}
 
   publish-package:
     executor: node-image
+    resource_class: small
     steps:
       - checkout
+      - restore_cache:
+          keys:
+            - node-v1-{{ .Branch }}-
+            - node-v1-
       - run:
           name: Install dependencies
           command: npm install
@@ -40,25 +55,36 @@ jobs:
           root: .
           paths:
             - .
+      - save_cache:
+          paths:
+            - ~/usr/local/lib/node_modules
+          key: node-v1-{{ .Branch }}-{{ checksum "package-lock.json" }}
 
   deploy-demo:
     executor: node-image
+    resource_class: small
     steps:
       - attach_workspace:
           at: .
+      - restore_cache:
+          key: heroku-v1
       - heroku/install
       - run:
           name: Build demo app
           command: npm run build:app
       - run:
-            name: Create git repo
-            command: cd demo-app && git init && git config user.email "$GIT_EMAIL" && git config user.name "$GIT_NAME"
+          name: Create git repo
+          command: cd demo-app && git init && git config user.email "$GIT_EMAIL" && git config user.name "$GIT_NAME"
       - run:
           name: Commit files
           command: cd demo-app && git add . && git commit -m"Deploy $CIRCLE_TAG"
       - run:
           name: Push to Heroku
           command: cd demo-app && git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git HEAD:master
+      - save_cache:
+          paths:
+            - ~/usr/local/bin/heroku
+          key: heroku-v1
 
 workflows:
   version: 2
@@ -66,8 +92,6 @@ workflows:
     jobs:
       - unit-tests:
           filters:
-            branches:
-              ignore: master
             tags:
               ignore: /.*/
   deploy:
