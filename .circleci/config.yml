@@ -55,10 +55,10 @@ jobs:
             command: cd demo-app && git init && git config user.email "$GIT_EMAIL" && git config user.name "$GIT_NAME"
       - run:
           name: Commit files
-          command: cd demo-app && git config -l && git add . && git commit -m'Deploy $CIRCLE_TAG'
+          command: cd demo-app && git add . && git commit -m"Deploy $CIRCLE_TAG"
       - run:
           name: Push to Heroku
-          command: cd demo-app && git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git $CIRCLE_TAG^{}:master
+          command: cd demo-app && git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git HEAD:master
 
 workflows:
   version: 2
