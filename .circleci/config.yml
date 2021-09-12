@@ -83,7 +83,7 @@ jobs:
           command: cd demo-app && git add . && git commit -m"Deploy $CIRCLE_TAG"
       - run:
           name: Push to Heroku
-          command: cd demo-app && git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git HEAD:master
+          command: cd demo-app && git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git HEAD:master -f
 
 workflows:
   version: 2
@@ -96,6 +96,8 @@ workflows:
   deploy:
     jobs:
       - publish-package:
+          requires:
+            - unit-tests
           filters:
             tags:
               only: /^v.*/
