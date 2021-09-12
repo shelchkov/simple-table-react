@@ -13,6 +13,7 @@
     "lint:fix": "npm run lint -- --fix",
     "test:cov": "npm run test -- --coverage",
     "test:watch": "npm run test -- --watch",
+    "build:app": "NODE_ENV=production webpack",
     "prebuild": "rm -rf dist",
     "copy-css": "mkdir dist && mkdir dist/styles && cp -r ./src/lib/styles/ ./dist/styles/",
     "compile:ts": "tsc",
@@ -20,7 +21,8 @@
     "lint": "npx eslint \"./src/**/*.{ts,tsx,js,jsx}\"",
     "preversion": "npm run lint:fix",
     "postversion": "git push; git push --tags",
-    "test": "jest --config jestconfig.json"
+    "test": "jest --config jestconfig.json",
+    "prebuild:app": "rm -rf demo-app/dist"
   },
   "keywords": [
     "react",
