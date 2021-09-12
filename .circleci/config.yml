@@ -21,7 +21,7 @@ jobs:
           name: Run tests
           command: npm run test:cov
       - codecov/upload:
-          file: './coverage/clover.xml'
+          file: './coverage/cobertura-coverage.xml'
 
   publish-package:
     executor: node-image
@@ -47,17 +47,18 @@ jobs:
       - attach_workspace:
           at: .
       - heroku/install
-      - heroku/check-authentication:
-          print-whoami: true
       - run:
           name: Build demo app
           command: npm run build:app
       - run:
+            name: Create git repo
+            command: cd demo-app && git init && git config user.email "$GIT_EMAIL" && git config user.name "$GIT_NAME"
+      - run:
           name: Commit files
-          command: cd demo-app && git init && git add . && git commit -m'Deploy $CIRCLE_TAG'
+          command: cd demo-app && git config -l && git add . && git commit -m'Deploy $CIRCLE_TAG'
       - run:
           name: Push to Heroku
-          command: cd demo-app && git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git $CIRCLE_TAG^{}:main
+          command: cd demo-app && git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git $CIRCLE_TAG^{}:master
 
 workflows:
   version: 2
