@@ -10,7 +10,7 @@
     "strict": true,
     "jsx": "react-jsx",
     "sourceMap": true,
-    "moduleResolution": "node",
+    "moduleResolution": "node"
   },
   "include": ["./src/lib/**/*"],
   "exclude": ["node_modules", "dist", "src/lib/__tests__"]

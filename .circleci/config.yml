@@ -21,7 +21,7 @@ jobs:
             - node-v2-
       - run:
           name: Install dependencies
-          command: npm install
+          command: npm install && git status
       - save_cache:
           paths:
             - node_modules
@@ -66,12 +66,12 @@ jobs:
       - attach_workspace:
           at: .
       - restore_cache:
-          key: heroku-v1
+          key: heroku-v2
       - heroku/install
       - save_cache:
           paths:
-            - ~/usr/local/bin/heroku
-          key: heroku-v1
+            - /usr/local/bin/heroku
+          key: heroku-v2
       - run:
           name: Build demo app
           command: npm run build:app
