@@ -1,5 +1,6 @@
 const path = require("path")
 const HtmlWebpackPlugin = require("html-webpack-plugin")
+const { DefinePlugin } = require("webpack")
 
 module.exports = {
   entry: path.join(__dirname, "src", "index.tsx"),
@@ -26,5 +27,6 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: path.join(__dirname, "public", "index.html"),
     }),
+    new DefinePlugin({ "process.env.CIRCLE_TAG": JSON.stringify(process.env.CIRCLE_TAG) }),
   ],
 }
