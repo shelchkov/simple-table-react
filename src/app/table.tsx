@@ -1,6 +1,7 @@
 import React, { ReactElement } from "react"
 import { DataTable } from "../lib"
 import { User } from "./utils"
+import "./styles.css"
 
 const headers = ["id", "name", "gender"]
 const data: User[] = [

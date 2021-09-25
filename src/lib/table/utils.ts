@@ -1,4 +1,4 @@
-export type TableData = Record<string, string | number>
+export type TableData = Record<string, string | number | string[]>
 
 export const removeEmptyColumns = (headers: string[], data: TableData[]): string[] => {
   if (data.length === 0) {

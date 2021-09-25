@@ -23,3 +23,7 @@ Pass an array of objects and a list of columns (headers) to DataTable:
 ```
 
 DataTable also receives optional functions: handleRowClick, getCellColor and getValue. Component that Actions function returns will be placed at the right of every row.
+
+## Styles customisation
+
+Styles can be added to css classses `simple-table` and `simple-table-cell` (can be used to style text and border color). Note that getCellColor will overwrite text color, so you will need to add `!important`.

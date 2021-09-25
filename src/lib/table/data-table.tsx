@@ -17,12 +17,12 @@ export const DataTable = <T extends TableData>({ headers, data, actions, ...rowP
   const filteredHeaders = removeEmptyColumns(headers, data)
 
   return (
-    <table className="table">
+    <table className="simple-table">
       <TableHead headers={filteredHeaders} actions={actions} />
 
       <tbody>
         {data.map((row) => (
-          <DataRow key={row.id} data={row} headers={filteredHeaders} actions={actions} {...rowProps} />
+          <DataRow key={row.id.toString()} data={row} headers={filteredHeaders} actions={actions} {...rowProps} />
         ))}
       </tbody>
     </table>

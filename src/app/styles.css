@@ -1,0 +1,8 @@
+.simple-table {
+  background-color: wheat;
+}
+
+.simple-table .simple-table-cell {
+  border-color: goldenrod;
+  color: grey;
+}

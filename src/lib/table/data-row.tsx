@@ -1,6 +1,6 @@
 import React, { ReactElement } from "react"
 import { Cell } from "./cell"
-import { noop } from "./utils"
+import { noop, TableData } from "./utils"
 
 interface Props<T> {
   headers: string[]
@@ -11,7 +11,7 @@ interface Props<T> {
   getCellColor?: (name: string, data: T) => string | undefined
 }
 
-export const DataRow = <T extends Record<string, string | number>>({
+export const DataRow = <T extends TableData>({
   headers,
   data,
   actions,
