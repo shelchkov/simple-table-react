@@ -1,6 +1,6 @@
 import React, { ReactElement } from "react"
-import { DataRow } from "./data-row"
 import "../styles/data-table.styles.css"
+import { DataRow } from "./data-row"
 import { TableHead } from "./table-head"
 import { removeEmptyColumns, TableData } from "./utils"
 
