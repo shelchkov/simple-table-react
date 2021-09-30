@@ -10,14 +10,14 @@ interface Props {
 export const Cell = ({ children = <></>, isHead, ...rest }: Props) => {
   if (isHead) {
     return (
-      <th className="cell" {...rest}>
+      <th className="simple-table-cell" {...rest}>
         {children}
       </th>
     )
   }
 
   return (
-    <td className="cell" {...rest}>
+    <td className="simple-table-cell" {...rest}>
       {children}
     </td>
   )

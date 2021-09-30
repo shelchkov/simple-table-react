@@ -34,5 +34,15 @@ describe("utils", () => {
       data[1].h3 = "5"
       expect(removeEmptyColumns(headers, data)).toEqual(headers)
     })
+
+    it("handles empty arrays", () => {
+      const data: TableData[] = [
+        { h1: "1", h2: "2" },
+        { h1: "3", h2: "4", h3: [] },
+      ]
+      expect(removeEmptyColumns(headers, data)).toEqual(headers.slice(0, 2))
+      data[1].h3 = ["6"]
+      expect(removeEmptyColumns(headers, data)).toEqual(headers)
+    })
   })
 })
