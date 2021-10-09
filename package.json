@@ -22,7 +22,8 @@
     "preversion": "npm run lint:fix",
     "postversion": "git push; git push --tags",
     "test": "jest --config jestconfig.json",
-    "prebuild:app": "rm -rf demo-app/dist"
+    "prebuild:app": "rm -rf demo-app/dist",
+    "typecheck": "tsc"
   },
   "keywords": [
     "react",
