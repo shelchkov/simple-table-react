@@ -1,7 +1,6 @@
-import React, { ReactElement } from "react"
+import React, { ReactElement, useState } from "react"
 import { DataTable } from "../lib"
 import { User } from "./utils"
-import "./styles.css"
 
 const headers = ["id", "name", "gender"]
 const data: User[] = [
@@ -12,8 +11,6 @@ const data: User[] = [
 
 const getCellColor = (name: string, { id }: User): string | undefined =>
   name === "name" && id === "2" ? "red" : undefined
-
-const Actions = (user: User) => <button onClick={() => console.log(user)}>Action</button>
 
 const getCellValue = (name: string, value: any): string => {
   if (name !== "sex") {
@@ -30,15 +27,26 @@ const getCellValue = (name: string, value: any): string => {
   }
 }
 
-const handleClick = ({ id }: User) => console.log(`Row with id ${id} was clicked`)
+export const Table = (): ReactElement => {
+  const [text, setText] = useState("")
 
-export const Table = (): ReactElement => (
-  <DataTable
-    headers={headers}
-    data={data}
-    actions={Actions}
-    handleRowClick={handleClick}
-    getCellColor={getCellColor}
-    getValue={getCellValue}
-  />
-)
+  const Actions = ({ name }: User) => (
+    <button onClick={() => setText(`Use clicked "action" for user with name ${name}`)}>Action</button>
+  )
+
+  const handleClick = ({ id }: User) => setText(`Row with id ${id} was clicked`)
+
+  return (
+    <div>
+      <DataTable
+        headers={headers}
+        data={data}
+        actions={Actions}
+        handleRowClick={handleClick}
+        getCellColor={getCellColor}
+        getValue={getCellValue}
+      />
+      <p className="table-caption">{text}</p>
+    </div>
+  )
+}
