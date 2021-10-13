@@ -1,7 +1,7 @@
 import React from "react"
 import { AppVersion } from "./app-version"
-import { Tables } from "./tables"
 import "./styles.css"
+import { Tables } from "./tables"
 
 export const App = () => (
   <div className="main">

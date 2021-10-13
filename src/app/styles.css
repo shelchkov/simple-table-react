@@ -1,7 +1,7 @@
 body {
   min-height: 100vh;
   margin: 0;
-  background-color: #A8C0CE;
+  background-color: #a8c0ce;
 }
 
 .main {
@@ -31,16 +31,16 @@ body {
 }
 
 .customised-table .simple-table {
-  background-color: #EEEC00;
+  background-color: #eeec00;
 }
 
 .customised-table .simple-table .simple-table-cell {
-  border-color: #AAB0B5;
+  border-color: #aab0b5;
   color: #768591;
 }
 
 .customised-table {
-  margin-top: 16px
+  margin-top: 16px;
 }
 
 .table-title {
