@@ -8,7 +8,7 @@
     "esModuleInterop": true,
     "allowJs": true,
     "strict": true,
-    "jsx": "react-jsx",
+    "jsx": "react",
     "sourceMap": true,
     "moduleResolution": "node"
   },

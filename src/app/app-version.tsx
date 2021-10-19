@@ -7,5 +7,9 @@ export const AppVersion = (): ReactElement => {
     return <></>
   }
 
-  return <p>Latest version: {version}</p>
+  return (
+    <div className="app-version">
+      <a href="https://www.npmjs.com/package/simple-table-react">Latest version: {version}</a>
+    </div>
+  )
 }

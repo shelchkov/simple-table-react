@@ -1,12 +1,14 @@
 import React from "react"
 import { AppVersion } from "./app-version"
-import { Table } from "./table"
+import "./styles.css"
+import { Tables } from "./tables"
 
 export const App = () => (
-  <div>
-    <h2>Simple Table React</h2>
+  <div className="main">
+    <p className="title">Simple Table React</p>
+
     <AppVersion />
 
-    <Table />
+    <Tables />
   </div>
 )

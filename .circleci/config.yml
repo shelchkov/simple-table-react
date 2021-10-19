@@ -27,6 +27,9 @@ jobs:
             - node_modules
           key: node-v2-{{ .Branch }}-{{ checksum "package-lock.json" }}
       - run:
+          name: Typecheck
+          command: npm run typecheck
+      - run:
           name: Run tests
           command: npm run test:cov
       - codecov/upload:
