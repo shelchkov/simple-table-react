@@ -15,7 +15,7 @@
     "test:watch": "npm run test -- --watch",
     "build:app": "NODE_ENV=production webpack",
     "prebuild": "rm -rf dist",
-    "copy-css": "mkdir dist && mkdir dist/styles && cp -r ./src/lib/styles/ ./dist/styles/",
+    "copy-css": "mkdir dist && mkdir dist/styles && cp -r ./src/lib/styles/ ./dist/",
     "compile:ts": "tsc",
     "prepublishOnly": "npm run build",
     "lint": "npx eslint \"./src/**/*.{ts,tsx,js,jsx}\"",

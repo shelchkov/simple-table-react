@@ -61,6 +61,8 @@ jobs:
           root: .
           paths:
             - .
+      - store_artifacts:
+          path: /dist
 
   deploy-demo:
     executor: node-image
