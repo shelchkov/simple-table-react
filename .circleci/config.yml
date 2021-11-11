@@ -61,8 +61,6 @@ jobs:
           root: .
           paths:
             - .
-      - store_artifacts:
-          path: /dist
 
   deploy-demo:
     executor: node-image
@@ -70,13 +68,7 @@ jobs:
     steps:
       - attach_workspace:
           at: .
-      - restore_cache:
-          key: heroku-v2
       - heroku/install
-      - save_cache:
-          paths:
-            - /usr/local/bin/heroku
-          key: heroku-v2
       - run:
           name: Build demo app
           command: npm run build:app
