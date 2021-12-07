@@ -1,6 +1,8 @@
 import { shallow, ShallowWrapper } from "enzyme"
 import React from "react"
-import { Cell } from "../../table/cell"
+import { Cell, clickableClass } from "../../table/cell"
+
+type Props = Parameters<typeof Cell>[0]
 
 describe("Cell Component", () => {
   let component: ShallowWrapper
@@ -61,6 +63,10 @@ describe("Cell Component", () => {
       expect(component.find("th").text()).toBe(children)
     })
 
+    it("applies correct className", () => {
+      expect(component.find("th").hasClass(clickableClass)).toBeFalsy()
+    })
+
     describe("Complecated children", () => {
       const children = <p>Test Paragrath 2</p>
 
@@ -71,6 +77,23 @@ describe("Cell Component", () => {
 
       it("renders tag", () => {
         expect(component.find("th").props().children).toBe(children)
+      })
+    })
+
+    describe("and handleClick is passed", () => {
+      const handleClickSpy = jest.fn()
+
+      beforeEach(() => {
+        const props: Props = { children, isHead: true, handleClick: handleClickSpy }
+        component = shallow(<Cell {...props} />)
+      })
+
+      it("applies correct className", () => {
+        expect(component.find("th").hasClass(clickableClass)).toBeTruthy()
+      })
+
+      it("passes handleClick to th", () => {
+        expect(component.find("th").prop("onClick")).toEqual(handleClickSpy)
       })
     })
   })

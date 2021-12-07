@@ -3,3 +3,7 @@
   color: black;
   border: 1px solid darkgrey;
 }
+
+.clickable-cell {
+  cursor: pointer;
+}
