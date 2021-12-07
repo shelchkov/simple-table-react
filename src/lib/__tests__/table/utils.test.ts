@@ -63,10 +63,14 @@ describe("utils", () => {
       sorting.direction = SortingDirection.ASC
     })
 
-    it("accepts getValue function", () => {})
+    it("accepts getValue function", () => {
+      const getValue = jest.fn().mockReturnValue(0)
+      sortData(data, sorting, getValue)
+      expect(getValue).toBeCalled()
+    })
 
     describe("and array is passed in data value", () => {
-      const data = [{ [key]: ["A"] }]
+      const data = [{ [key]: ["A"] }, { [key]: ["B"] }]
 
       it("doesn't throw errors", () => {
         expect(sortData(data, sorting)).toEqual(data)

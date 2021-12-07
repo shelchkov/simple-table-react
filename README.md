@@ -9,7 +9,7 @@
 
 ## How to use
 
-Pass an array of objects and a list of columns (headers) to DataTable:
+Pass an array of objects (each should contain id) and a list of columns (headers) to DataTable:
 
 ```javaScript
 <DataTable

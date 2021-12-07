@@ -13,7 +13,7 @@ const getCellColor = (name: string, { id }: User): string | undefined =>
   name === "name" && id === "2" ? "red" : undefined
 
 const getCellValue = (name: string, value: any): string => {
-  if (name !== "sex") {
+  if (name !== "gender") {
     return value
   }
 
