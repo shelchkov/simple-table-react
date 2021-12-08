@@ -5,12 +5,15 @@ interface Props {
   children?: ReactNode
   isHead?: boolean
   style?: CSSProperties
+  handleClick?: () => void
 }
 
-export const Cell = ({ children = <></>, isHead, ...rest }: Props) => {
+export const clickableClass = "clickable-cell"
+
+export const Cell = ({ children = <></>, isHead, handleClick, ...rest }: Props) => {
   if (isHead) {
     return (
-      <th className="simple-table-cell" {...rest}>
+      <th className={`simple-table-cell ${handleClick ? clickableClass : ""}`} onClick={handleClick} {...rest}>
         {children}
       </th>
     )

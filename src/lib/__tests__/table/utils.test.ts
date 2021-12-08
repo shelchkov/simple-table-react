@@ -1,4 +1,4 @@
-import { noop, removeEmptyColumns, TableData } from "../../table/utils"
+import { noop, removeEmptyColumns, sortData, Sorting, SortingDirection, TableData } from "../../table/utils"
 
 describe("utils", () => {
   describe("noop function", () => {
@@ -43,6 +43,46 @@ describe("utils", () => {
       expect(removeEmptyColumns(headers, data)).toEqual(headers.slice(0, 2))
       data[1].h3 = ["6"]
       expect(removeEmptyColumns(headers, data)).toEqual(headers)
+    })
+  })
+
+  describe("sortData function", () => {
+    const key = "key"
+    const data = [{ [key]: 3 }, { [key]: 2 }, { [key]: 5 }]
+    const sorting: Sorting = { column: key, direction: SortingDirection.ASC }
+    const sortedData = [{ [key]: 2 }, { [key]: 3 }, { [key]: 5 }]
+
+    it("sorting is optional", () => {
+      expect(sortData(data)).toEqual(data)
+    })
+
+    it("sorts array", () => {
+      expect(sortData(data, sorting)).toEqual(sortedData)
+      sorting.direction = SortingDirection.DESC
+      expect(sortData(data, sorting)).toEqual(sortedData.reverse())
+      sorting.direction = SortingDirection.ASC
+    })
+
+    it("accepts getValue function", () => {
+      const getValue = jest.fn().mockReturnValue(0)
+      sortData(data, sorting, getValue)
+      expect(getValue).toBeCalled()
+    })
+
+    describe("and array is passed in data value", () => {
+      const data = [{ [key]: ["A"] }, { [key]: ["B"] }]
+
+      it("doesn't throw errors", () => {
+        expect(sortData(data, sorting)).toEqual(data)
+      })
+    })
+
+    describe("and string values passed", () => {
+      const data = [{ [key]: "C" }, { [key]: "B" }]
+
+      it("sorting works", () => {
+        expect(sortData(data, sorting)).toEqual(data.reverse())
+      })
     })
   })
 })
