@@ -26,4 +26,4 @@ DataTable also receives optional functions: handleRowClick, getCellColor and get
 
 ## Styles customisation
 
-Styles can be added to css classses `simple-table` and `simple-table-cell` (can be used to style text and border color). Note that getCellColor will overwrite text color, so you will need to add `!important`.
+Styles can be added to css classses `simple-table`, `simple-table-cell` (can be used to style text and border color), `simple-table-head` and `simple-table-row`. Note that getCellColor will overwrite text color, so you will need to add `!important`.

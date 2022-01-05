@@ -22,7 +22,7 @@ export const DataRow = <T extends TableData>({
   const onClick = () => handleRowClick(data)
 
   return (
-    <tr onClick={onClick}>
+    <tr onClick={onClick} className="simple-table-row">
       {headers.map((name) => (
         <Cell key={name} style={{ color: getCellColor(name, data) }}>
           {getValue(name, data[name], data)}
