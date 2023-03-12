@@ -9,7 +9,7 @@ interface Props<T> {
 }
 
 export const TableHead = <T extends TableData>({ headers, actions, toggleSorting }: Props<T>): ReactElement => (
-  <thead>
+  <thead className="simple-table-head">
     <tr>
       {headers.map((header) => {
         const handeClick = () => toggleSorting(header)

@@ -39,6 +39,10 @@ body {
   color: #768591;
 }
 
+.customised-table .simple-table .simple-table-head {
+  background-color: #aab0b5;
+}
+
 .customised-table {
   margin-top: 16px;
 }
