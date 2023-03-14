@@ -36,7 +36,7 @@ for:
       - npm run typecheck
       - npm run test:cov
     after_test:
-      - codecov.sh -f "coverage/cobertura-coverage.xml" -t ${CODECOV_TOKEN}
+      - ./codecov.sh -f "coverage/cobertura-coverage.xml" -t ${CODECOV_TOKEN}
     build: off
 
   -
