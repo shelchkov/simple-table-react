@@ -1,0 +1,58 @@
+environment:
+  NODE_VERSION: "14"
+  CODECOV_TEST_REPORTER: https://codecov.io/bash
+  NPM_AUTH_TOKEN:
+    secure: K8AN+8bCWLe2w8YzZE0HvENwQO0JPoY4fUZQGmH4U6x6WIP/Z1UAIof4OeNXBc8T
+  DEPLOY_HOOK_URL:
+    secure: lgHgjTE7lKmIKHVjnf51q0zxzzmourN5yJMDM5nmvHOX1Jl4y/uvjgpIdlh55AJQhgpmjYuMm9imKG1Y+wdRqmmpAiDNAym+GqSDgUE4X3I=
+
+  matrix:
+    - job_name: Unit Tests
+      job_group: Tests
+    - job_name: Publish Package
+      job_depends_on: Unit Tests
+    - job_name: Deploy Demo
+      job_depends_on: Unit Tests
+
+image: Ubuntu2004
+skip_branch_with_pr: true
+
+init:
+  - nvm use ${NODE_VERSION}
+install:
+  - npm install
+
+for:
+  -
+    matrix:
+      only:
+        - job_name: Unit Tests
+    cache:
+      - node_modules -> package-lock.json
+    before_test:
+      - curl ${CODECOV_TEST_REPORTER} --output codecov.sh
+      - chmod +x ./codecov.sh || true
+    test_script:
+      - npm run typecheck
+      - npm run test:cov
+    after_test:
+      - ./codecov.sh -f "coverage/cobertura-coverage.xml" -t ${CODECOV_TOKEN}
+    build: off
+
+  -
+    matrix:
+      only:
+        - job_name: Publish Package
+    skip_non_tags: true
+    before_deploy:
+      - echo "//registry.npmjs.org/:_authToken=${NPM_AUTH_TOKEN}" > .npmrc
+    deploy_script:
+      - npm publish --access public
+
+  -
+    matrix:
+      only:
+        - job_name: Deploy Demo
+    skip_non_tags: true
+    deploy_script:
+      - curl ${DEPLOY_HOOK_URL}

@@ -13,7 +13,7 @@
     "lint:fix": "npm run lint -- --fix",
     "test:cov": "npm run test -- --coverage",
     "test:watch": "npm run test -- --watch",
-    "build:app": "NODE_ENV=production webpack",
+    "build:app": "NODE_ENV=production TAG_NAME=$npm_package_version webpack",
     "prebuild": "rm -rf dist",
     "copy-css": "mkdir dist && mkdir dist/styles && cp -r ./src/lib/styles/ ./dist/",
     "compile:ts": "tsc",
