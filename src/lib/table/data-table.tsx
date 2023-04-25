@@ -9,7 +9,7 @@ interface Props<T> {
   data: T[]
   actions?: (value: T) => ReactElement
   handleRowClick?: (data: T) => void
-  getValue?: (name: string, value: any, data: T) => string | number
+  getValue?: (name: string, value: unknown, data: T) => string | number
   getCellColor?: (name: string, data: T) => string | undefined
 }
 

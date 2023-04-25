@@ -12,9 +12,9 @@ const data: User[] = [
 const getCellColor = (name: string, { id }: User): string | undefined =>
   name === "name" && id === "2" ? "red" : undefined
 
-const getCellValue = (name: string, value: any): string => {
+const getCellValue = (name: string, value: unknown): string => {
   if (name !== "gender") {
-    return value
+    return `${value}`
   }
 
   switch (value) {
