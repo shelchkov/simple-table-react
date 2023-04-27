@@ -31,7 +31,7 @@ describe("DataTable component", () => {
   describe("and sorting is toggled", () => {
     const key = "key"
     const sorted = [{ [key]: 1, id: "id1" }]
-    let toggleSorting = Utils.noop as any
+    let toggleSorting = Utils.noop as (columnKey: string) => void
 
     beforeAll(() => {
       toggleSorting = component.find(TableHead).prop("toggleSorting")

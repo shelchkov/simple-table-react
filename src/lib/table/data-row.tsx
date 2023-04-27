@@ -7,7 +7,7 @@ interface Props<T> {
   data: T
   actions?: (value: T) => ReactElement
   handleRowClick?: (data: T) => void
-  getValue?: (name: string, value: any, data: T) => string | number
+  getValue?: (name: string, value: TableData[keyof TableData], data: T) => string | number
   getCellColor?: (name: string, data: T) => string | undefined
 }
 
@@ -16,7 +16,7 @@ export const DataRow = <T extends TableData>({
   data,
   actions,
   handleRowClick = noop,
-  getValue = (_, value) => value,
+  getValue = (_, value) => `${value}`,
   getCellColor = noop,
 }: Props<T>): ReactElement => {
   const onClick = () => handleRowClick(data)

@@ -31,19 +31,10 @@ export const removeEmptyColumns = (headers: string[], data: TableData[]): string
 
 export const noop = () => undefined
 
-// TODO: Not used
-// const convertToNumber = (value: string | number) => {
-//   if (typeof value !== "number") {
-//     return parseFloat(value)
-//   }
-
-//   return value
-// }
-
 export const sortData = <T extends TableData>(
   data: T[],
   sorting?: Sorting,
-  getValue?: (name: string, value: any, data: T) => string | number
+  getValue?: (name: string, value: unknown, data: T) => string | number
 ): T[] => {
   if (!sorting) {
     return data
